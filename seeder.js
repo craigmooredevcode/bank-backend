@@ -9,7 +9,7 @@ const seedExpenseTransactions = async() => {
         for(let i = 0; i < quantity; i++) {
             expenseTransaction.push(
                 new Transaction({
-                    source: `Lawal Olaotan`,
+                    source: `Craig Moore`,
                     accountNumber: faker.finance.account(10),
                     name: `${faker.name.firstName()} ${faker.name.lastName()}`,
                     reference: faker.random.alphaNumeric(6),
@@ -25,7 +25,7 @@ const seedExpenseTransactions = async() => {
         })
 
         // const test = {
-        //     fname: `Lawal Olaotan`,
+        //     fname: `Craig Moore`,
         //     lname: faker.name.lastName(),
         //     accountNumber: faker.finance.account(10),
         //     reference: faker.random.alphaNumeric(6),
@@ -48,7 +48,7 @@ const seedIncomeTransactions = async () => {
                 new Transaction({
                     source: `${faker.name.firstName()} ${faker.name.lastName()}`,
                     accountNumber: faker.finance.account(10),
-                    name: `Lawal Olaotan`,
+                    name: `Craig Moore`,
                     reference: faker.random.alphaNumeric(6),
                     amount: faker.finance.amount(600, 3500, 2),
                     date: faker.date.past(0.5)
