@@ -1,0 +1,47 @@
+.Login {
+    /* background-position: l; */
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    padding-top: 60px;
+}
+
+.LoginCard {
+    min-height: 400px;
+}
+
+.Login a {
+    color: #0057FF;
+}
+
+.Error {
+    font-size: 15px;
+    color: red;
+    /* padding: 4px 0 0 4px; */
+}
+
+.BgImage {
+    background-color: #2f353a;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../../../assets/bg-image-02.jpg);
+    transform: scale(1.1);
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.CustomBtn {
+    background-color: #0057FF;
+    border-color: #0057FF;
+}
+
+.CustomBtn:hover {
+    background-color: #003ECB;
+    border-color: #003ECB;
+}
