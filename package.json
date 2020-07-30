@@ -20,6 +20,7 @@
     "dot-prop": "^5.2.0",
     "dotenv": "^6.2.0",
     "express": "^4.17.1",
+    "faker": "^4.1.0",
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.25",
@@ -28,7 +29,6 @@
     "validator": "^10.11.0"
   },
   "devDependencies": {
-    "faker": "^4.1.0",
     "nodemon": "^1.19.4"
   },
   "engines": {
