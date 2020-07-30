@@ -55,7 +55,7 @@ class Login extends Component {
           <div className={styles.BgImage}></div>
             <div className="row align-items-center">
               <div className="col-md-6 offset-md-1">
-                  <h2 className="text-white display-2">MERN<br/> Banking</h2>
+                  <h2 className="text-white display-2">Prime<br/> Bank</h2>
               </div>
             <div className="col-md-4">
               <div className={["card", "mx-auto", "my-5", styles.LoginCard].join(' ')}>
