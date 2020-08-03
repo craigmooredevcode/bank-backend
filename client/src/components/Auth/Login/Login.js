@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Logo from "../../../assets/Prime-Favicon.png";
 import { Form, FormGroup, InputGroup, Input, Button} from 'reactstrap';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -55,13 +56,14 @@ class Login extends Component {
           <div className={styles.BgImage}></div>
             <div className="row align-items-center">
               <div className="col-md-6 offset-md-1">
-                  <h2 className="text-white display-2">Prime<br/> Bank</h2>
+                <img className="mb-2" src={Logo} alt="Logo" />
+                <h2 className="text-white display-2 font-weight-bold">Prime<br/> Bank</h2>
               </div>
             <div className="col-md-4">
               <div className={["card", "mx-auto", "my-5", styles.LoginCard].join(' ')}>
                  { auth.loading ? <Loader /> : <React.Fragment>
                  <div className="card-header">
-                          <h1>Login</h1>
+                          <h1 className="font-weight-bold">Login</h1>
                     </div>
                     <div className="card-body">
                     <Form noValidate onSubmit={this.onSubmit}>
@@ -109,12 +111,7 @@ class Login extends Component {
               </Form>
                     </div>
                     <div className="card-footer">
-                    <Link to="/">
-                        Back to home
-                    </Link>
-                    <p className="grey-text text-darken-1">
-                        Don't have an account? <Link to="/register">Register</Link>
-                    </p>
+                      <Link to="/register">Back to home</Link>
                     </div>
                   </React.Fragment>   }
               </div>

@@ -85,7 +85,8 @@ router.post("/login", (req, res) => {
             id: user.id,
             name: user.name,
             balance: user.balance,
-            email: user.email
+            email: user.email,
+            isAdmin: user.isAdmin
           };
 
           // Sign token
@@ -112,7 +113,7 @@ router.post("/login", (req, res) => {
 });
 
 
-// @route POST api/users/:acct_num
+// @route get api/users/:acct_num
 // @desc Get a specific user by its account number
 // @access Private
 router.get("/:acct_num", (req, res) => {
@@ -134,6 +135,38 @@ router.get("/user/:id", (req, res) => {
     } else {
       return res.status(404).json({user: "User does not exist"})
     }
+  })
+})
+
+
+// @route get api/users
+// @desc Get all users
+// @access Private
+
+router.get("/", (req, res) => {
+  User.find({isAdmin: false}).then(users => {
+    return res.status(200).send(users)
+  }).catch(err => {
+    res.status(500).json({
+      status: false,
+      message: err.response
+    })
+  })
+})
+
+
+router.delete("/user/:email", (req, res) => {
+  const userEmail = req.params.email;
+  User.deleteOne({email: userEmail}).then(user => {
+    return res.status(200).json({
+      status: true,
+      message: "User successfully deleted"
+    })
+  }).catch(err => {
+    return res.status(500).json({
+      status: false,
+      message: err.message
+    })
   })
 })
 

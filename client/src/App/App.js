@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Landing from "../components/layout/Landing/Landing";
 import Login from "../components/Auth/Login/Login";
+import Admin from "../components/Admin/Admin";
 import Register from "../components/Auth/Register/Register";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import Dashboard from "../components/Dashboard/Dashboard";
@@ -24,6 +25,7 @@ import setAuthToken from "../utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "../actions/authActions";
 // import "./App.css";
 import PageNotFound from "../components/PageNotFound/PageNotFound";
+
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -50,6 +52,7 @@ class App extends Component {
       <BrowserRouter>
         <React.Fragment>
           <Route exact path="/" component={Landing} />
+          <Route exact path="/admin-user" component={Admin} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <PrivateRoute component={Navigation} />

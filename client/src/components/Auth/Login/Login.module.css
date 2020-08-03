@@ -3,11 +3,17 @@
     min-height: 100vh;
     overflow: hidden;
     position: relative;
-    padding-top: 60px;
+    padding-top: calc(28% - 300px);
+    font-family: 'DM Sans', sans-serif;
+}
+
+.Login h2 {
+    line-height: 82px;
 }
 
 .LoginCard {
-    min-height: 400px;
+    min-height: 350px;
+    padding-top: 16px;
 }
 
 .Login a {
@@ -37,11 +43,11 @@
 }
 
 .CustomBtn {
-    background-color: #0057FF;
-    border-color: #0057FF;
+    background-color: #008000;
+    border-color: #008000;
 }
 
 .CustomBtn:hover {
-    background-color: #003ECB;
-    border-color: #003ECB;
+    background-color: #076807;
+    border-color: #076807;
 }

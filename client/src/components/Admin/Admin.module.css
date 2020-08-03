@@ -1,0 +1,25 @@
+.Admin {
+    max-width: 900px;
+    margin: 0 auto;
+    margin-top: 40px;
+    font-family: 'DM Sans', sans-serif;
+    text-align: center;
+}
+
+.Admin h2 {
+    opacity: 0.9;
+}
+
+.LogoutBtn {
+    width: 220px;
+}
+
+.UserCard {
+    padding: 12px 22px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.UserCard p {
+    font-size: 18px;
+    line-height: 22px;
+}

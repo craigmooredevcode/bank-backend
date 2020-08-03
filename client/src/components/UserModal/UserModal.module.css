@@ -1,0 +1,18 @@
+.UserModal {
+    font-family: 'DM Sans', sans-serif;
+    display: inline-block;
+}
+
+.CreateButton {
+    background-color: #008000;
+    width: 220px;
+}
+
+.CreateButton:hover, .CreateButton:focus, .CreateButton:active {
+    background-color: #006300;
+}
+
+.Error {
+    font-size: 15px;
+    color: red;
+}

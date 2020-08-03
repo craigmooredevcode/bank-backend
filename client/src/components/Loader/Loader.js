@@ -5,7 +5,7 @@ import styled from 'styled-components';
 export default function Loader() {
   return (
     <LoaderWrapper>
-      <ReactLoading color="#0057FF" type="spin" width={100} height={100} delay={100} />
+      <ReactLoading color="#008000" type="spin" width={100} height={100} delay={100} />
     </LoaderWrapper>
   )
 }
