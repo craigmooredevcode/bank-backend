@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const nodemailer = require("nodemailer");
+require('dotenv').config();
 
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
