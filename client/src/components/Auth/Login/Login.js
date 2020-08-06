@@ -111,7 +111,7 @@ class Login extends Component {
               </Form>
                     </div>
                     <div className="card-footer">
-                      <Link to="/register">Back to home</Link>
+                      <a href="https://primeonline.online">Back to home</a>
                     </div>
                   </React.Fragment>   }
               </div>

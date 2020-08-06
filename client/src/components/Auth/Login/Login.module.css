@@ -17,7 +17,11 @@
 }
 
 .Login a {
-    color: #0057FF;
+    color: #008000;
+}
+
+.Login a:hover {
+    color: #008000;
 }
 
 .Error {
