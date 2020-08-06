@@ -9,6 +9,7 @@ import {
   GET_USER,
   GET_ALL_USERS
 } from "./types";
+import { image } from "faker";
 
 // Register User
 export const registerUser = (userData, history) => dispatch => {
@@ -79,10 +80,13 @@ export const loginUser = userData => dispatch => {
 // Get user 
 export const getUser = acctNum => dispatch => {
   axios.get(`/api/users/${acctNum}`).then(res => {
+    console.log(res.data);
     dispatch({
       type: GET_USER,
       payload: res.data
     })
+  }).catch(err => {
+    console.log(err);
   })
 }
 
@@ -133,4 +137,17 @@ export const deleteUser = (userEmail) => dispatch => {
       payload: err.response.message
     })
   })
+}
+
+//
+
+// Update a user details
+export const updateUser = (uid, updateData) => dispatch => {
+    axios.patch(`api/users/user/${uid}`, updateData).then(res => {
+      console.log(res.data);
+    }).catch(err => {
+      console.log(err.response.message);
+    })
+  // });
+  
 }

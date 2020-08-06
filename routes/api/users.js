@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
+const nodemailer = require("nodemailer");
 
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
@@ -45,7 +46,42 @@ router.post("/register", (req, res) => {
             newUser.password = hash;
             newUser
                 .save()
-                .then(user => res.json(user))
+                .then(user => {
+                  res.json(user)
+
+                  // send email on successful registration
+                    const transporter = nodemailer.createTransport({
+                      service: 'gmail',
+                      auth: {
+                        user: process.env.FROM_EMAIL,
+                        pass: process.env.EMAIL_PASSWORD
+                      }
+                    });
+
+                    const mailOptions = {
+                      from: 'noreply@primeonline.online',
+                      to: req.body.email,
+                      subject: 'Prime Bank - Online Banking Account Created',
+                      // text: 'It works!'
+                      html: `
+                        <h1>Your Prime Online Banking Account was Successfully Created </h1>
+                        <p><strong>Dear ${req.body.name},</p>
+                        <p>We are happy to let you know that your prime online banking account has been successfully created and activated.</p>
+                        <p>Ready to get started? <a href="#">Sign in</a> to your account now and start receiving and sending payment</p>
+                        <p>If you have any questions, <a href="https://primeonline.online/#contact">contact us</a></p>
+                        <br />
+                        <p><em>Thank you, The Prime Bank Team</em></p>
+                      `
+                    }
+
+                    transporter.sendMail(mailOptions, (err, data) => {
+                      if(err) {
+                        console.log('Error occurs', err);
+                      } else {
+                        console.log('Email sent!')
+                      }
+                    })
+                })
                 .catch(err => console.log(err));
             });
         });
@@ -79,6 +115,36 @@ router.post("/login", (req, res) => {
       // Check password
       bcrypt.compare(password, user.password).then(isMatch => {
         if (isMatch) {
+          // send email on successful login
+          const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: process.env.FROM_EMAIL,
+              pass: process.env.EMAIL_PASSWORD
+            }
+          });
+
+          const mailOptions = {
+            from: 'noreply@primeonline.online',
+            to: user.email,
+            subject: 'Prime Bank - Sign In Success',
+            // text: 'It works!'
+            html: `
+              <h1>You've just signed in successfully</h1>
+              <p>It looks like you just signed in to your primeonline online banking account. If this is not you, please let us know immediately</p>
+              <br />
+              <p><em>Towards an awesome banking experience</em></p>
+            `
+          }
+
+          transporter.sendMail(mailOptions, (err, data) => {
+            if(err) {
+              console.log('Error occurs', err);
+            } else {
+              console.log('Email sent!')
+            }
+          })
+
           // User matched
           // Create JWT Payload
           const payload = {
@@ -122,8 +188,12 @@ router.get("/:acct_num", (req, res) => {
     if(user) {
       return res.status(200).send(user);
     } else {
-      return res.status(404).json({accountNumber: "Input a Valid Account Number"})
+      return res.status(404).json({userExist: false});
     }
+  }).catch(err => {
+    res.status(404).json({
+      userExist: false
+    })
   })
 });
 
@@ -170,6 +240,42 @@ router.delete("/user/:email", (req, res) => {
   })
 })
 
+// @route update api/users
+// @desc Update a particular user
+// @access Private
+
+router.patch("/user/:id", (req, res) => {
+  const { photoURL, occupation, phone } = req.body;
+  if(!photoURL && !occupation && !phone) {
+    return res.status(400).send({
+      status: false,
+      message: "No update was sent"
+    })
+  }
+
+  User.findOne({_id: req.params.id}).then(user => {
+    let newValues = { $set: { } };
+    if(photoURL) {
+      newValues.$set.photoURL = photoURL;
+    }
+    if(occupation) {
+      newValues.$set.occupation = occupation;
+    }
+    if(phone) {
+      newValues.$set.phone = phone;
+    }
+
+    User.updateOne({_id: req.params.id}, newValues).then(data => {
+      res.status(200).json({
+        data: data
+      })
+    }).catch(err => {
+      res.status(404).send({
+        status: false,
+        message: "User does not exist"
+      })
+    })
+  })
+})
+
 module.exports = router;
-
-

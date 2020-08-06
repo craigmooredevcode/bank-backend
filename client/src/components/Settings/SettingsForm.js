@@ -4,7 +4,7 @@ import {Form, FormGroup, Label, Input, Col, Row} from 'reactstrap';
 class SettingsForm extends Component {
   render() {
     return (
-      <Row className="my-5 mx-0">
+      <Row className="my-5 mx-0" style={{fontFamily: "'DM Sans', sans-serif"}}>
         <Col md="6">
             <Form>
                 <FormGroup row>

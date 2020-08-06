@@ -1,22 +1,40 @@
 import React, { Component } from "react";
 import { Form, FormGroup, Input } from "reactstrap";
-import { Container, Row, Col } from "reactstrap";
-import Modal from "../../components/Modal/Modal";
+import { Container, Row, Col, Modal, ModalBody, ModalHeader } from "reactstrap";
+import ModalExample from "../../components/Modal/Modal";
 import { connect } from "react-redux";
 import TransactionsList from "../Transactions/TransactionsList/TransactionsList";
 import styled from "styled-components";
 
 class Transactions extends Component {
+  state = {
+    transactionStatus: false,
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevProps.transactions.transactionStatus !== this.props.transactions.transactionStatus) {
+      this.setState({
+        transactionStatus: !this.props.transactions.transactionStatus
+      })
+    }
+  }
+
+  toggle = (e) => {
+    this.setState(prevState => ({
+      transactionStatus: !prevState.transactionStatus
+    }))
+  }
+
   render() {
     return (
-      <TransactionsWrapper className="mb-5">
+      <TransactionsWrapper>
         <div className="header-wrapper">
           <h6 className="header text-white">Transactions</h6>
         </div>
         <Container>
           <Row>
             <Col md="4" className="my-5">
-              <Modal />
+              <ModalExample />
             </Col>
           </Row>
           <Row>
@@ -47,25 +65,32 @@ class Transactions extends Component {
             </Col>
           </Row>
         </Container>
+        <Modal isOpen={this.state.transactionStatus} style={{fontFamily: "'DM Sans', sans-serif"}} toggle={this.toggle}>
+          <ModalHeader toggle={this.toggle}>Transfer Failed</ModalHeader>
+          <ModalBody>
+            Transfer failed
+          </ModalBody>
+        </Modal>
       </TransactionsWrapper>
     );
   }
 }
 
 const TransactionsWrapper = styled.div`
-  margin-left: 2rem;
-  width: 70rem;
-  height: auto;
+  font-family: 'DM Sans', sans-serif;
+  padding-left: 2rem;
+  width: 85%;
+  min-height: 100vh;
   background-color: #3a4149;
-  border: 1px solid #000;
+  border-left: 1px solid rgba(0, 0, 0, 0.4);
 
   .header {
     text-align: left;
-    font-family: "Open Sans";
+    font-family: 'DM Sans', sans-serif;
     padding: 1.3rem 1rem 1rem 1rem;
   }
   .text-white {
-    font-family: Open Sans;
+    font-family: 'DM Sans', sans-serif;
   }
   .header-wrapper {
     background-color: #343b41;
@@ -79,6 +104,7 @@ const TransactionsWrapper = styled.div`
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  transactions: state.transactions
 });
 
 export default connect(mapStateToProps)(Transactions);

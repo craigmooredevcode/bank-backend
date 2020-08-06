@@ -5,6 +5,8 @@ import {
   TRANSACTIONS_LOADING,
   GET_INCOME_LIST,
   GET_EXPENSE_LIST,
+  TRANSACTION_STATUS,
+  RESET_TRANSACTION_STATUS,
   SEARCH
 } from "./types";
 
@@ -36,18 +38,25 @@ export const getExpenseList = source => dispatch => {
       payload: res.data
     })
   }).catch(err => {
-    console.log(err);
+    console.log(err.res);
   })
 }
 
 export const addTransaction = transaction => dispatch => {
-  axios.post("/api/transactions", transaction).then(res =>
-    dispatch({
-      type: ADD_TRANSACTION,
-      payload: res.data
-    })
+  axios.post("/api/transactions", transaction).then(res => {
+      dispatch({ type: RESET_TRANSACTION_STATUS });
+      dispatch({
+        type: ADD_TRANSACTION,
+        payload: res.data
+      })
+    }
   ).catch(err => {
-    console.log(err);
+    console.log(err.response.data);
+    dispatch({ type: RESET_TRANSACTION_STATUS });
+    dispatch({
+      type: TRANSACTION_STATUS,
+      payload: err.response.data.userExist
+    })
   });
 };
 

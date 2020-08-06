@@ -1,4 +1,5 @@
 body {
     background-color: #2f353a;
     font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
 }

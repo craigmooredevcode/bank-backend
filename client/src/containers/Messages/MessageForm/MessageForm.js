@@ -39,13 +39,14 @@ class MessageForm extends Component {
   };
   render() {
     return (
-      <div>
+      <div style={{fontFamily: "'DM Sans', sans-serif"}}>
         <Form>
           <FormGroup>
             <Input
               type="text"
               name="name"
               id="name"
+              size="lg"
               placeholder="Name"
               value={this.state.name}
               onChange={this.onChange}
@@ -56,6 +57,7 @@ class MessageForm extends Component {
               type="text"
               name="email"
               id="email"
+              size="lg"
               placeholder="Email"
               value={this.state.email}
               onChange={this.onChange}
@@ -66,6 +68,7 @@ class MessageForm extends Component {
               type="select"
               name="select"
               id="select"
+              size="lg"
               value={this.state.select}
               onChange={this.onChange}
             >
@@ -81,12 +84,13 @@ class MessageForm extends Component {
               type="textarea"
               name="message"
               id="message"
+              size="lg"
               placeholder="Message"
               value={this.state.message}
               onChange={this.onChange}
             />
           </FormGroup>
-          <Button onClick={this.handleSubmit} color="primary">
+          <Button onClick={this.handleSubmit} style={{backgroundColor: "#008000", border: "none"}} size="lg">
             Send Message
           </Button>
         </Form>

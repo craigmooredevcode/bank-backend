@@ -72,16 +72,18 @@ export default function Settings() {
 }
 
 const SettingsWrapper = styled.div`
-margin-left: 2rem;
+font-family: 'DM Sans', sans-serif;
+padding-left: 2rem;
+background-color: #3a4149;
 .profile-wrapper {
     width: 70rem;
     height: auto;
     background-color: #3a4149;
-    border: 1px solid #000;
+    border: 1px solid rgba(0, 0, 0, 0.4);
 }
 .header {
     text-align: left;
-    font-family: 'Open Sans';
+    font-family: 'DM Sans', sans-serif;
     padding: 1.3rem 1rem 1rem 1rem;
 
 }
@@ -90,7 +92,7 @@ margin-left: 2rem;
     border-bottom: 1px solid #000;
 }
 .horizontal-line {
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
     width: 100%;
 }
 

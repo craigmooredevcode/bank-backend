@@ -72,8 +72,8 @@ class ModalExample extends React.Component {
 
     return (
       <div>
-        <Button className="mb-3" color="primary" size="lg" onClick={this.toggle}>New Transfer</Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <Button className="mb-3" style={{fontFamily: "'DM Sans', sans-serif", backgroundColor: "#008000", border: "none"}} size="lg" onClick={this.toggle}>New Transfer</Button>
+        <Modal isOpen={this.state.modal} style={{fontFamily: "'DM Sans', sans-serif"}} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>New Transfer</ModalHeader>
           <ModalBody>
           <Form onSubmit={this.onHandleSubmit}>
@@ -87,7 +87,7 @@ class ModalExample extends React.Component {
             onChange={this.onChange}
            />
         </FormGroup>
-        <Button color="primary" className="btn-sm mb-3" onClick={this.onHandleConfirmRecipient}>Confirm Recipient</Button>
+        <Button style={{backgroundColor: "#008000"}} className="btn-sm mb-3" onClick={this.onHandleConfirmRecipient}>Confirm Recipient</Button>
         <FormGroup>
           <Label for="name">Recipient's name</Label>
           <Input
@@ -121,7 +121,7 @@ class ModalExample extends React.Component {
       </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.onHandleSubmit}>Confirm Transfer</Button>{' '}
+            <Button style={{backgroundColor: "#008000"}} onClick={this.onHandleSubmit}>Confirm Transfer</Button>{' '}
           </ModalFooter>
         </Modal>
       </div>

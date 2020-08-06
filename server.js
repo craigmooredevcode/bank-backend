@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require("passport");
 const path = require('path');
+const cors = require('cors');
 
 const users = require("./routes/api/users");
 const transactions = require("./routes/api/transactions");
@@ -19,6 +20,7 @@ app.use(
     })
 );
 app.use(bodyParser.json());
+app.use(cors());
 
 //DB config
 const db = require('./config/keys').mongoURI;

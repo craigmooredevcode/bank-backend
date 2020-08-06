@@ -19,11 +19,15 @@ const UserSchema = new Schema({
     type: Number,
     required: true
   },
-  Occupation: {
+  occupation: {
     type: String,
     required: false
   },
-  Phone: {
+  phone: {
+    type: String,
+    required: false
+  },
+  photoURL: {
     type: String,
     required: false
   },

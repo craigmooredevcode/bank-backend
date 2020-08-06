@@ -23,5 +23,9 @@ export default class Dashboard extends Component {
 }
 
 const PanelWrapper = styled.div`
+  // overflow-x: hidden;
+  margin-top: 75px
+  width: 85%;
   background-color: #2f353a;
+  font-family: 'DM Sans', sans-serif;
 `;

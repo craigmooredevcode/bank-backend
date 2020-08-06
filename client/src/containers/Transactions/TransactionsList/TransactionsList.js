@@ -15,11 +15,10 @@ class TransactionsList extends React.Component {
       return <Loader />;
     } else {
       return (
-        <div>
+        <div style={{fontFamily: "'DM Sans', sans-serif"}}>
           {transactions.map(
             ({
               accountNumber,
-              address,
               name,
               reference,
               amount,
@@ -29,7 +28,6 @@ class TransactionsList extends React.Component {
               <SingleTransaction
                 key={_id}
                 accountNumber={accountNumber}
-                address={address}
                 name={name}
                 reference={reference}
                 amount={amount}

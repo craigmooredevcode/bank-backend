@@ -54,15 +54,25 @@ export default class Sidebar extends Component {
 }
 
 const SidebarWrapper = styled.div`
+margin-top: 75px;
+width: 200px;
+background-color: #3A4652;
+font-family: 'DM Sans', sans-serif;
+.sidebar {
+  width: 200px;
+  position: fixed;
+  height: 100vh;
+}
 .list-group {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 .nav-item {
+  width: 100%;
   margin: 0;
   padding: 0;
-  background-color: #000!important;
+  background-color: #3A4652!important;
   border-bottom: 1px solid #999;
   .nav-link {
     text-decoration: none;
@@ -70,8 +80,8 @@ const SidebarWrapper = styled.div`
     font-weight: 300;
     color: #999;
     &:hover {
-      background-color: #fff!important;
-      color: #000!important;
+      background-color: #008000!important;
+      color: #fff!important;
     }
   }
 }

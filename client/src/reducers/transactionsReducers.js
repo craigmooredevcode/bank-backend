@@ -4,11 +4,14 @@ import {
   TRANSACTIONS_LOADING,
   GET_INCOME_LIST,
   GET_EXPENSE_LIST,
-  SEARCH
+  SEARCH,
+  TRANSACTION_STATUS,
+  RESET_TRANSACTION_STATUS
 } from "../actions/types";
 
 const initialState = {
   transactions: [],
+  transactionStatus: true,
   loading: false,
   value: "",
   works: [],
@@ -43,6 +46,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: true
+      };
+    case TRANSACTION_STATUS:
+      return {
+        ...state,
+        transactionStatus: action.payload
+      };
+    case RESET_TRANSACTION_STATUS:
+      return {
+        ...state,
+        transactionStatus: true
       };
     case SEARCH:
       const value = action.payload;

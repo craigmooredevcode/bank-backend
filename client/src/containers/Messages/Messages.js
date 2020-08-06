@@ -26,19 +26,19 @@ class Messages extends Component {
 }
 
 const MessagesWrapper = styled.div`
-  margin-left: 2rem;
-  width: 70rem;
-  height: auto;
+  padding-left: 2rem;
+  width: 85%;
+  min-height: 100vh;
   background-color: #3a4149;
-  border: 1px solid #000;
+  border-left: 1px solid rgba(0, 0, 0, 0.4);
 
   .header {
     text-align: left;
-    font-family: "Open Sans";
+    font-family: 'DM Sans', sans-serif;
     padding: 1.3rem 1rem 1rem 1rem;
   }
   .text-white {
-    font-family: Open Sans;
+    font-family: 'DM Sans', sans-serif;
   }
   .header-wrapper {
     background-color: #343b41;

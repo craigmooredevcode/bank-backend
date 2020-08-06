@@ -18,9 +18,6 @@ export default function SingleTransaction({
             <strong>Payee:</strong> {name}
           </h6>
           <h6 className="mr-4">
-            <strong>Address:</strong> {address}
-          </h6>
-          <h6 className="mr-4">
             <strong>Account Number:</strong> {accountNumber}
           </h6>
           <h6>
@@ -29,7 +26,7 @@ export default function SingleTransaction({
         </div>
         <div className="d-flex flex-row justify-content-start align-items-center">
           <h6 className="mr-4">
-            <strong>Amount:</strong> {amount}
+            <strong>Amount:</strong> ${amount}
           </h6>
           <h6>
             <strong>Date:</strong> {date}

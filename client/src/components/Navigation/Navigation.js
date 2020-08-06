@@ -13,8 +13,7 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import PropTypes from 'prop-types';
 import Search from '../Modal/Search';
-import NotificationDropdown from './NotificationDropdown';
-import MessagesDropdown from './MessagesDropdown';
+// import MessagesDropdown from './MessagesDropdown';
 import Axios from 'axios';
 class Navigation extends React.Component {
     constructor(props) {
@@ -38,6 +37,17 @@ class Navigation extends React.Component {
       })
     }
 
+    componentDidUpdate(prevProps, prevState) {
+      if(prevProps.transactions !== this.props.transactions) {
+        Axios.get(`/api/users/user/${this.props.auth.user.id}`).then(res => {
+          const user = res.data;
+          this.setState({
+            userData: user
+          })
+        })
+      }
+    }
+
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
@@ -49,9 +59,14 @@ class Navigation extends React.Component {
     };
   render() {
     const { user } = this.props.auth;
+    const { userData } = this.state;
+    const balance = {...userData}.balance;
+    const photoURL = {...userData}.photoURL;
+    // const fixedBal = balance.toFixed(2);
+    console.log(balance);
     return (
       <div>
-        <Navbar color="dark" dark expand="md">
+        <Navbar expand="md" fixed="top" style={{fontFamily: "DM Sans", backgroundColor: "#2a323a"}}>
           <NavbarBrand>
               <span className="text-white text-uppercase">
                  {user.name}
@@ -60,19 +75,16 @@ class Navigation extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto d-flex flex-row justify-content-center align-items-center" navbar>
-              <NavItem className="text-white">BALANCE: ${user.balance.toFixed(2)}</NavItem>
+              <NavItem className="text-white" style={{fontSize: '18px'}}>BALANCE: ${balance}</NavItem>
               <NavItem>
                   <Search/>
               </NavItem>
-              <NavItem>
-                  <NotificationDropdown/>
-              </NavItem>
-              <NavItem>
+              {/* <NavItem>
                    <MessagesDropdown/>
-              </NavItem>
+              </NavItem> */}
               <NavItem>
                 <NavLink href="/account">
-                    <img className="img-fluid rounded-circle mx-3 mb-1" src="https://via.placeholder.com/40" alt="Avatar"/>
+                    <img className="img-fluid rounded-circle mx-3 mb-1" style={{width: "40px", height: "40px", objectFit: "cover"}} src={photoURL ? photoURL : "https://via.placeholder.com/40" } alt="Avatar"/>
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -94,7 +106,8 @@ Navigation.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        auth: state.auth
+        auth: state.auth,
+        transactions: state.transactions
     }
 }
 

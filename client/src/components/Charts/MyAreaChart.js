@@ -31,13 +31,13 @@ const MyAreaChart = () => {
 
                         <XAxis
                             dataKey="date"
-                            fontFamily="Open Sans"
+                            fontFamily="DM Sans"
                             fontSize="14"
                         />
                         <YAxis
                             dataKey="y"
                             fontSize="14"
-                            fontFamily="Open Sans"
+                            fontFamily="DM Sans"
                         />
                         <CartesianGrid
                             vertical={false}
@@ -72,7 +72,7 @@ const MyAreaChart = () => {
 }
 
 const ChartWrapper = styled.div`
-
+font-family: 'DM Sans', sans-serif;
 margin-left: 2rem;
 .chart-wrapper {
     width: 70rem;
@@ -82,7 +82,7 @@ margin-left: 2rem;
 }
 .header {
     text-align: left;
-    font-family: 'Open Sans';
+    font-family: 'DM Sans', sans-serif;
     padding: 1.3rem 1rem 1rem 1rem;
 
 }
