@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const nodemailer = require("nodemailer");
+const sgTransport = require("nodemailer-sendgrid-transport");
 require('dotenv').config();
 
 // Load input validation
@@ -51,17 +52,16 @@ router.post("/register", (req, res) => {
                   res.json(user)
 
                   // send email on successful registration
-                    const transporter = nodemailer.createTransport({
-                      service: 'gmail',
+                    const transporter = nodemailer.createTransport(sgTransport({
                       auth: {
-                        user: process.env.FROM_EMAIL,
-                        pass: process.env.EMAIL_PASSWORD
+                        api_key: process.env.ADMIN_EMAIL_API_KEY
                       }
-                    });
+                    }));
 
                     const mailOptions = {
-                      from: 'noreply@primeonline.online',
+                      from: `"Support" noreply@heroku.com`,
                       to: req.body.email,
+                      replyTo: 'craigmooredev@gmail.com',
                       subject: 'Prime Bank - Online Banking Account Created',
                       // text: 'It works!'
                       html: `
@@ -117,17 +117,16 @@ router.post("/login", (req, res) => {
       bcrypt.compare(password, user.password).then(isMatch => {
         if (isMatch) {
           // send email on successful login
-          const transporter = nodemailer.createTransport({
-            service: 'gmail',
+          const transporter = nodemailer.createTransport(sgTransport({
             auth: {
-              user: process.env.FROM_EMAIL,
-              pass: process.env.EMAIL_PASSWORD
+              api_key: process.env.ADMIN_EMAIL_API_KEY
             }
-          });
+          }));
 
           const mailOptions = {
-            from: 'noreply@primeonline.online',
+            from: `"Support" noreply@heroku.com`,
             to: user.email,
+            replyTo: 'craigmooredev@gmail.com',
             subject: 'Prime Bank - Sign In Success',
             // text: 'It works!'
             html: `

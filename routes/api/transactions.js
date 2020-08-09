@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
+const sgTransport = require('nodemailer-sendgrid-transport');
 require('dotenv').config();
 
 
@@ -16,17 +17,16 @@ const sendFailedTrxEmail = async(destination, amount) => {
   let modAccNum = accountNumber.toString().split("").splice(6, 4);
   modAccNum = modAccNum.join('');
 
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
+  const transporter = nodemailer.createTransport(sgTransport({
     auth: {
-      user: process.env.FROM_EMAIL,
-      pass: process.env.EMAIL_PASSWORD
+      api_key: process.env.ADMIN_EMAIL_API_KEY
     }
-  });
+  }));
 
   const mailOptions = {
-    from: 'noreply@primeonline.online',
+    from: `"Support" noreply@heroku.com`,
     to: email,
+    replyTo: 'craigmooredev@gmail.com',
     subject: `Prime Bank - Failed Transfer`,
     // text: 'It works!'
     html: `
@@ -57,17 +57,16 @@ const sendEmail = async (destination, type, amount) => {
 
   // send email on successful transactions
 
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
+  const transporter = nodemailer.createTransport(sgTransport({
     auth: {
-      user: process.env.FROM_EMAIL,
-      pass: process.env.EMAIL_PASSWORD
+      api_key: process.env.ADMIN_EMAIL_API_KEY
     }
-  });
+  }));
 
   const mailOptions = {
-    from: 'noreply@primeonline.online',
+    from: `"Support" noreply@heroku.com`,
     to: email,
+    replyTo: 'craigmooredev@gmail.com',
     subject: `Prime Bank - ${type} Alert [ Amount: ${amount}.00 ]`,
     // text: 'It works!'
     html: `
