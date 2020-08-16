@@ -124,7 +124,7 @@ router.post("/login", (req, res) => {
           }));
 
           const mailOptions = {
-            from: `"Support" noreply-prime@heroku.com`,
+            from: process.env.SENDGRID_USERNAME,
             to: user.email,
             replyTo: 'craigmooredev@gmail.com',
             subject: 'Prime Bank - Sign In Success',
