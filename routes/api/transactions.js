@@ -2,9 +2,15 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
-const sgTransport = require('nodemailer-sendgrid-transport');
+// const sgTransport = require('nodemailer-sendgrid-transport');
+const nodemailerSendgrid = require("nodemailer-sendgrid");
 require('dotenv').config();
 
+const transport = nodemailer.createTransport(
+  nodemailerSendgrid({
+    apiKey: process.env.SENDGRID_API_KEY
+  })
+);
 
 //Transaction model
 const Transaction = require('../../models/Transaction');
@@ -17,14 +23,14 @@ const sendFailedTrxEmail = async(destination, amount) => {
   let modAccNum = accountNumber.toString().split("").splice(6, 4);
   modAccNum = modAccNum.join('');
 
-  const transporter = nodemailer.createTransport(sgTransport({
-    auth: {
-      api_key: process.env.SENDGRID_API_KEY
-    }
-  }));
+  // const transporter = nodemailer.createTransport(sgTransport({
+  //   auth: {
+  //     api_key: process.env.SENDGRID_API_KEY
+  //   }
+  // }));
 
   const mailOptions = {
-    from: `"Support" noreply-prime@heroku.com`,
+    from: `no-reply@primeonline.online`,
     to: email,
     replyTo: 'craigmooredev@gmail.com',
     subject: `Prime Bank - Failed Transfer`,
@@ -39,7 +45,7 @@ const sendFailedTrxEmail = async(destination, amount) => {
     `
   }
 
-  transporter.sendMail(mailOptions, (err, data) => {
+  transport.sendMail(mailOptions, (err, data) => {
     if(err) {
       console.log('Error occurs', err);
     } else {
@@ -57,14 +63,14 @@ const sendEmail = async (destination, type, amount) => {
 
   // send email on successful transactions
 
-  const transporter = nodemailer.createTransport(sgTransport({
-    auth: {
-      api_key: process.env.SENDGRID_API_KEY
-    }
-  }));
+  // const transporter = nodemailer.createTransport(sgTransport({
+  //   auth: {
+  //     api_key: process.env.SENDGRID_API_KEY
+  //   }
+  // }));
 
   const mailOptions = {
-    from: `"Support" noreply-prime@heroku.com`,
+    from: `no-reply@primeonline.online`,
     to: email,
     replyTo: 'craigmooredev@gmail.com',
     subject: `Prime Bank - ${type} Alert [ Amount: ${amount}.00 ]`,
@@ -84,7 +90,7 @@ const sendEmail = async (destination, type, amount) => {
     `
   }
 
-  transporter.sendMail(mailOptions, (err, data) => {
+  transport.sendMail(mailOptions, (err, data) => {
     if(err) {
       console.log('Error occurs', err);
     } else {

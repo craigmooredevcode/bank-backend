@@ -4,8 +4,15 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const nodemailer = require("nodemailer");
-const sgTransport = require("nodemailer-sendgrid-transport");
+// const sgTransport = require("nodemailer-sendgrid-transport");
+const nodemailerSendgrid = require("nodemailer-sendgrid");
 require('dotenv').config();
+
+const transport = nodemailer.createTransport(
+  nodemailerSendgrid({
+    apiKey: process.env.SENDGRID_API_KEY
+  })
+);
 
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
@@ -52,14 +59,14 @@ router.post("/register", (req, res) => {
                   res.json(user)
 
                   // send email on successful registration
-                    const transporter = nodemailer.createTransport(sgTransport({
-                      auth: {
-                        api_key: process.env.SENDGRID_API_KEY
-                      }
-                    }));
+                    // const transporter = nodemailer.createTransport(sgTransport({
+                    //   auth: {
+                    //     api_key: process.env.SENDGRID_API_KEY
+                    //   }
+                    // }));
 
                     const mailOptions = {
-                      from: `"Support" noreply-prime@heroku.com`,
+                      from: `noreply@primeonline.online`,
                       to: req.body.email,
                       replyTo: 'craigmooredev@gmail.com',
                       subject: 'Prime Bank - Online Banking Account Created',
@@ -75,7 +82,7 @@ router.post("/register", (req, res) => {
                       `
                     }
 
-                    transporter.sendMail(mailOptions, (err, data) => {
+                    transport.sendMail(mailOptions, (err, data) => {
                       if(err) {
                         console.log('Error occurs', err);
                       } else {
@@ -117,14 +124,14 @@ router.post("/login", (req, res) => {
       bcrypt.compare(password, user.password).then(isMatch => {
         if (isMatch) {
           // send email on successful login
-          const transporter = nodemailer.createTransport(sgTransport({
-            auth: {
-              api_key: process.env.SENDGRID_API_KEY
-            }
-          }));
+          // const transporter = nodemailer.createTransport(sgTransport({
+          //   auth: {
+          //     api_key: process.env.SENDGRID_API_KEY
+          //   }
+          // }));
 
           const mailOptions = {
-            from: process.env.SENDGRID_USERNAME,
+            from: `no-reply@primeonline.online`,
             to: user.email,
             replyTo: 'craigmooredev@gmail.com',
             subject: 'Prime Bank - Sign In Success',
@@ -137,7 +144,7 @@ router.post("/login", (req, res) => {
             `
           }
 
-          transporter.sendMail(mailOptions, (err, data) => {
+          transport.sendMail(mailOptions, (err, data) => {
             if(err) {
               console.log('Error occurs', err);
             } else {
