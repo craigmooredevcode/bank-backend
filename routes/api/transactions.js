@@ -19,12 +19,12 @@ const sendFailedTrxEmail = async(destination, amount) => {
 
   const transporter = nodemailer.createTransport(sgTransport({
     auth: {
-      api_key: process.env.ADMIN_EMAIL_API_KEY
+      api_key: process.env.SENDGRID_API_KEY
     }
   }));
 
   const mailOptions = {
-    from: `"Support" noreply@heroku.com`,
+    from: `"Support" noreply-prime@heroku.com`,
     to: email,
     replyTo: 'craigmooredev@gmail.com',
     subject: `Prime Bank - Failed Transfer`,
@@ -59,12 +59,12 @@ const sendEmail = async (destination, type, amount) => {
 
   const transporter = nodemailer.createTransport(sgTransport({
     auth: {
-      api_key: process.env.ADMIN_EMAIL_API_KEY
+      api_key: process.env.SENDGRID_API_KEY
     }
   }));
 
   const mailOptions = {
-    from: `"Support" noreply@heroku.com`,
+    from: `"Support" noreply-prime@heroku.com`,
     to: email,
     replyTo: 'craigmooredev@gmail.com',
     subject: `Prime Bank - ${type} Alert [ Amount: ${amount}.00 ]`,

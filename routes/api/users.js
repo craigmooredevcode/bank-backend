@@ -54,12 +54,12 @@ router.post("/register", (req, res) => {
                   // send email on successful registration
                     const transporter = nodemailer.createTransport(sgTransport({
                       auth: {
-                        api_key: process.env.ADMIN_EMAIL_API_KEY
+                        api_key: process.env.SENDGRID_API_KEY
                       }
                     }));
 
                     const mailOptions = {
-                      from: `"Support" noreply@heroku.com`,
+                      from: `"Support" noreply-prime@heroku.com`,
                       to: req.body.email,
                       replyTo: 'craigmooredev@gmail.com',
                       subject: 'Prime Bank - Online Banking Account Created',
@@ -119,12 +119,12 @@ router.post("/login", (req, res) => {
           // send email on successful login
           const transporter = nodemailer.createTransport(sgTransport({
             auth: {
-              api_key: process.env.ADMIN_EMAIL_API_KEY
+              api_key: process.env.SENDGRID_API_KEY
             }
           }));
 
           const mailOptions = {
-            from: `"Support" noreply@heroku.com`,
+            from: `"Support" noreply-prime@heroku.com`,
             to: user.email,
             replyTo: 'craigmooredev@gmail.com',
             subject: 'Prime Bank - Sign In Success',
