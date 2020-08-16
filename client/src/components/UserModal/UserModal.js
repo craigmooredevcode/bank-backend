@@ -80,7 +80,7 @@ class UserModal extends Component {
             if(!fields[key]) {
                 errorInit[key] = 'This field is required';
             }
-            if(!fields.email.match(validMail)) {
+            if(fields.email && !fields.email.match(validMail)) {
                 errorInit.email = 'Email is invalid';
             }
             if(fields.password && fields.password.length < 6) {

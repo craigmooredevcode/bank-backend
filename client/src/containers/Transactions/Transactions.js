@@ -68,7 +68,10 @@ class Transactions extends Component {
         <Modal isOpen={this.state.transactionStatus} style={{fontFamily: "'DM Sans', sans-serif"}} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Transfer Failed</ModalHeader>
           <ModalBody>
-            Transfer failed
+          <p>
+            We are sorry to inform you that your transfer transaction failed on your Prime Savings Account
+          </p>
+          <p>Please you can try again, and if you continue having an error, do not hesitate to send us a message to this email-address or call us on 9000099</p>
           </ModalBody>
         </Modal>
       </TransactionsWrapper>
